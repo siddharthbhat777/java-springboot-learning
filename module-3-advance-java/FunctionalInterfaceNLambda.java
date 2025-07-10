@@ -13,7 +13,7 @@ interface ReturnValueA {
     int add(int a, int b);
 }
 
-public class FunctionalInterfaceDemo {
+public class FunctionalInterfaceNLambda {
     public static void main(String[] args) {
         A obj = new A() {
             @Override
