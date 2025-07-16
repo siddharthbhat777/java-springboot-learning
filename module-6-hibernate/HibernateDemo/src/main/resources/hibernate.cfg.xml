@@ -1,0 +1,20 @@
+<hibernate-configuration xmlns="http://www.hibernate.org/xsd/orm/cfg">
+    <session-factory>
+        <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
+        <property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/demo</property>
+        <property name="hibernate.connection.username">postgres</property>
+        <property name="hibernate.connection.password">root</property>
+        <!--not necessary but better if specified for operations-->
+        <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
+
+        <!--it will create the table if not exists and will update if exists-->
+        <!--there are 3 options none, create and update-->
+        <!--hbm -> hibernate mapping-->
+        <property name="hibernate.hbm2ddl.auto">update</property>
+
+        <!--let you see the executed query in console-->
+        <property name="hibernate.show_sql">true</property>
+        <!--query showed in console will be properly formatted-->
+        <property name="hibernate.format_sql">true</property>
+    </session-factory>
+</hibernate-configuration>
