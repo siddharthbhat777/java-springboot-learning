@@ -9,9 +9,9 @@ public class Main {
     public static void main(String[] args) {
         // Creating student data
         Student s1 = new Student();
-        s1.setRollNumber(105);
-        s1.setStudentName("Priyanka");
-        s1.setStudentAge(29);
+        s1.setRollNumber(102);
+        s1.setStudentName("Madhusudan");
+        s1.setStudentAge(31);
 
         // establishing connection with database using config
         /*Configuration config = new Configuration();
@@ -25,8 +25,27 @@ public class Main {
         Session session = sf.openSession();
 
         // Creating transaction to do operation
+        /*Transaction transaction = session.beginTransaction();
+        session.persist(s1); // store data in database
+        transaction.commit();*/
+
+        // Getting data
+         /*Student s2 = session.find(Student.class, 102);
+         System.out.println(s2);*/
+
+        // Update data
+        /*Transaction transaction = session.beginTransaction();
+        session.merge(s1); // Update the data, if data not found then it will create it
+        transaction.commit();*/
+
+        // Delete data
+        // remove method needs object instead of id
+        // getting object with ID
+        Student s2 = session.find(Student.class, 105);
+        System.out.println(s2);
+        // removing data using object
         Transaction transaction = session.beginTransaction();
-        session.persist(s1);
+        session.remove(s2);
         transaction.commit();
 
         // Closing session
