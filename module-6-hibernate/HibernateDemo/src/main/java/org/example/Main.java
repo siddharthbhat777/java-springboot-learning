@@ -8,10 +8,10 @@ import org.hibernate.cfg.Configuration;
 public class Main {
     public static void main(String[] args) {
         // Creating student data
-        Student s1 = new Student();
+        /*Student s1 = new Student();
         s1.setRollNumber(102);
         s1.setStudentName("Madhusudan");
-        s1.setStudentAge(31);
+        s1.setStudentAge(31);*/
 
         // establishing connection with database using config
         /*Configuration config = new Configuration();
@@ -21,8 +21,8 @@ public class Main {
         // Using session to perform database operation
         // SessionFactory sf = config.buildSessionFactory();
         // Merging all
-        SessionFactory sf = new Configuration().addAnnotatedClass(org.example.Student.class).configure().buildSessionFactory();
-        Session session = sf.openSession();
+        /*SessionFactory sf = new Configuration().addAnnotatedClass(org.example.Student.class).configure().buildSessionFactory();
+        Session session = sf.openSession();*/
 
         // Creating transaction to do operation
         /*Transaction transaction = session.beginTransaction();
@@ -41,17 +41,32 @@ public class Main {
         // Delete data
         // remove method needs object instead of id
         // getting object with ID
-        Student s2 = session.find(Student.class, 105);
+        /*Student s2 = session.find(Student.class, 105);
         System.out.println(s2);
         // removing data using object
         Transaction transaction = session.beginTransaction();
         session.remove(s2);
+        transaction.commit();*/
+
+        // Creating alien data
+        Alien a1 = new Alien();
+        a1.setAlienId(101);
+        a1.setAlienName("Siddharth");
+        a1.setTechnology("Java");
+
+        // Using session
+        SessionFactory sf = new Configuration().addAnnotatedClass(org.example.Alien.class).configure().buildSessionFactory();
+        Session session = sf.openSession();
+
+        // Using transaction
+        Transaction transaction = session.beginTransaction();
+//        session.persist(a1);
         transaction.commit();
 
         // Closing session
         session.close();
         sf.close();
 
-        System.out.println(s1);
+//        System.out.println(s1);
     }
 }
