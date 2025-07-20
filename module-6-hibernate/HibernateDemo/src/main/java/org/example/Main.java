@@ -4,8 +4,10 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.query.Query;
 
 import java.util.Arrays;
+import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
@@ -51,7 +53,7 @@ public class Main {
         transaction.commit();*/
 
         // Creating laptop data
-        Laptop l1 = new Laptop();
+        /*Laptop l1 = new Laptop();
         l1.setLaptopId(1);
         l1.setBrand("ASUS");
         l1.setModel("ROG");
@@ -65,10 +67,10 @@ public class Main {
         l3.setLaptopId(3);
         l3.setBrand("Apple");
         l3.setModel("Macbook");
-        l3.setRam(8);
+        l3.setRam(8);*/
 
         // Creating alien data
-        Alien a1 = new Alien();
+        /*Alien a1 = new Alien();
         a1.setAlienId(101);
         a1.setAlienName("Siddharth");
         a1.setTechnology("Java");
@@ -78,40 +80,58 @@ public class Main {
         a2.setAlienName("Ruchika");
         a2.setTechnology("Python");
 
-        /*Alien a3 = new Alien();
+        Alien a3 = new Alien();
         a3.setAlienId(103);
         a3.setAlienName("Vasudha");
         a3.setTechnology("C++");*/
 
         // Association
-        a1.setLaptops(Arrays.asList(l1, l2));
-        a2.setLaptops(Arrays.asList(l3));
+        /*a1.setLaptops(Arrays.asList(l1, l2));
+        a2.setLaptops(Arrays.asList(l3));*/
 
         // Using session
         SessionFactory sf = new Configuration()
-                .addAnnotatedClass(org.example.Alien.class)
+                // .addAnnotatedClass(org.example.Alien.class)
                 .addAnnotatedClass(org.example.Laptop.class)
                 .configure().buildSessionFactory();
         Session session = sf.openSession();
 
         // Using transaction
-        Transaction transaction = session.beginTransaction();
+        /*Transaction transaction = session.beginTransaction();
         session.persist(l1);
         session.persist(l2);
         session.persist(l3);
         session.persist(a1);
         session.persist(a2);
-        //  session.persist(a3);
-        transaction.commit();
+        session.persist(a3);
+        transaction.commit();*/
+
+        // Adding HQL query
+        // Normal SQL -> select * from laptop where ram=32
+        // HQL -> from Laptop where ram=32
+        // Query query = session.createQuery("from Laptop where brand like 'ASUS'");
+        String brand = "ASUS";
+        // Query query = session.createQuery("from Laptop where brand like ?1"); // just giving numbering to '?' to identify
+        Query query = session.createQuery("select brand, model from Laptop where brand like ?1");
+        query.setParameter(1, brand);
+        List<Object[]> laptops = query.getResultList();
+
+        // Fetching details
+        // Laptop l1 = session.find(Laptop.class, 3);
+        // System.out.println(l1);
+        // System.out.println(laptops);
+        for (Object[] data: laptops) {
+            System.out.println((String)data[0] + " " + (String)data[1]);
+        }
 
         // Closing session
         session.close();
 
         // Testing data fetch EAGER / LAZY
-        Session session1 = sf.openSession();
+        /*Session session1 = sf.openSession();
         Alien a3 = session1.find(Alien.class, 102);
         //  System.out.println(a3);
-        session1.close();
+        session1.close();*/
 
         //Closing factory
         sf.close();
