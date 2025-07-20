@@ -48,19 +48,26 @@ public class Main {
         session.remove(s2);
         transaction.commit();*/
 
+        // Creating laptop data
+        Laptop l1 = new Laptop();
+        l1.setBrand("ASUS");
+        l1.setModel("ROG");
+        l1.setRam(16);
+
         // Creating alien data
-        Alien1 a1 = new Alien1();
+        Alien a1 = new Alien();
         a1.setAlienId(101);
         a1.setAlienName("Siddharth");
         a1.setTechnology("Java");
+        a1.setLaptop(l1);
 
         // Using session
-        SessionFactory sf = new Configuration().addAnnotatedClass(Alien1.class).configure().buildSessionFactory();
+        SessionFactory sf = new Configuration().addAnnotatedClass(Alien.class).configure().buildSessionFactory();
         Session session = sf.openSession();
 
         // Using transaction
         Transaction transaction = session.beginTransaction();
-//        session.persist(a1);
+        session.persist(a1);
         transaction.commit();
 
         // Closing session
