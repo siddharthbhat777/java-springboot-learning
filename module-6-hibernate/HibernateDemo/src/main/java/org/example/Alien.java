@@ -11,7 +11,8 @@ public class Alien {
     private String alienName;
     private String technology;
     //  @OneToMany(mappedBy = "alien") // alien is name of variable in Laptop model
-    @ManyToMany
+    //  @ManyToMany
+    @OneToMany(fetch = FetchType.EAGER) // Default is LAZY which is better
     private List<Laptop> laptops;
 
     public int getAlienId() {

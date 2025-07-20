@@ -78,19 +78,14 @@ public class Main {
         a2.setAlienName("Ruchika");
         a2.setTechnology("Python");
 
-        Alien a3 = new Alien();
+        /*Alien a3 = new Alien();
         a3.setAlienId(103);
         a3.setAlienName("Vasudha");
-        a3.setTechnology("C++");
+        a3.setTechnology("C++");*/
 
         // Association
         a1.setLaptops(Arrays.asList(l1, l2));
-        a2.setLaptops(Arrays.asList(l2, l3));
-        a3.setLaptops(Arrays.asList(l1));
-
-        l1.setAliens(Arrays.asList(a1, a3));
-        l2.setAliens(Arrays.asList(a1, a2));
-        l3.setAliens(Arrays.asList(a2));
+        a2.setLaptops(Arrays.asList(l3));
 
         // Using session
         SessionFactory sf = new Configuration()
@@ -106,13 +101,19 @@ public class Main {
         session.persist(l3);
         session.persist(a1);
         session.persist(a2);
-        session.persist(a3);
+        //  session.persist(a3);
         transaction.commit();
 
         // Closing session
         session.close();
-        sf.close();
 
-//        System.out.println(s1);
+        // Testing data fetch EAGER / LAZY
+        Session session1 = sf.openSession();
+        Alien a3 = session1.find(Alien.class, 102);
+        //  System.out.println(a3);
+        session1.close();
+
+        //Closing factory
+        sf.close();
     }
 }
