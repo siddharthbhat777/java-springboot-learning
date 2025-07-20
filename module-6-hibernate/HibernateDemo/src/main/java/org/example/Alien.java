@@ -2,14 +2,16 @@ package org.example;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 public class Alien {
     @Id
     private int alienId;
     private String alienName;
     private String technology;
-    @OneToOne
-    private Laptop laptop;
+    @OneToMany(mappedBy = "alien") // alien is name of variable in Laptop model
+    private List<Laptop> laptops;
 
     public int getAlienId() {
         return alienId;
@@ -35,12 +37,12 @@ public class Alien {
         this.technology = technology;
     }
 
-    public Laptop getLaptop() {
-        return laptop;
+    public List<Laptop> getLaptops() {
+        return laptops;
     }
 
-    public void setLaptop(Laptop laptop) {
-        this.laptop = laptop;
+    public void setLaptops(List<Laptop> laptops) {
+        this.laptops = laptops;
     }
 
     @Override
@@ -49,7 +51,7 @@ public class Alien {
                 "alienId=" + alienId +
                 ", alienName='" + alienName + '\'' +
                 ", technology='" + technology + '\'' +
-                ", laptop=" + laptop +
+                ", laptops=" + laptops +
                 '}';
     }
 }

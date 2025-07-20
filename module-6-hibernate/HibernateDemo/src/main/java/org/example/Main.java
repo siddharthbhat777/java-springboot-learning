@@ -5,6 +5,8 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
+import java.util.Arrays;
+
 public class Main {
     public static void main(String[] args) {
         // Creating student data
@@ -54,13 +56,22 @@ public class Main {
         l1.setBrand("ASUS");
         l1.setModel("ROG");
         l1.setRam(16);
+        Laptop l2 = new Laptop();
+        l2.setLaptopId(2);
+        l2.setBrand("Dell");
+        l2.setModel("XPS");
+        l2.setRam(32);
 
         // Creating alien data
         Alien a1 = new Alien();
         a1.setAlienId(101);
         a1.setAlienName("Siddharth");
         a1.setTechnology("Java");
-        a1.setLaptop(l1);
+        a1.setLaptops(Arrays.asList(l1, l2));
+
+        // Association
+        l1.setAlien(a1);
+        l2.setAlien(a1);
 
         // Using session
         SessionFactory sf = new Configuration()
@@ -72,6 +83,7 @@ public class Main {
         // Using transaction
         Transaction transaction = session.beginTransaction();
         session.persist(l1);
+        session.persist(l2);
         session.persist(a1);
         transaction.commit();
 
