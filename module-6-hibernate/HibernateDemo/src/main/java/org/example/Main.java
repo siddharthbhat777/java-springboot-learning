@@ -125,8 +125,12 @@ public class Main {
         }*/
 
         // Load instead of get
-        Laptop laptop = session.byId(Laptop.class).getReference(2);
-        // System.out.println(laptop);
+        /*Laptop laptop = session.byId(Laptop.class).getReference(2);
+        System.out.println(laptop);*/
+
+        // Using Ehcache
+        Laptop l1 = session.find(Laptop.class, 2);
+        System.out.println(l1);
 
         // Closing session
         session.close();
@@ -136,6 +140,12 @@ public class Main {
         Alien a3 = session1.find(Alien.class, 102);
         //  System.out.println(a3);
         session1.close();*/
+
+        // Ehcache
+        Session session1 = sf.openSession();
+        Laptop l2 = session1.find(Laptop.class, 2);
+        System.out.println(l2);
+        session1.close();
 
         //Closing factory
         sf.close();

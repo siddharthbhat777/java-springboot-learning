@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import java.util.List;
 
 @Entity
+@Cacheable // for level 2 cache
 public class Laptop {
     @Id
     private  int laptopId;
