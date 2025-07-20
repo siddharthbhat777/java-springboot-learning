@@ -110,19 +110,23 @@ public class Main {
         // Normal SQL -> select * from laptop where ram=32
         // HQL -> from Laptop where ram=32
         // Query query = session.createQuery("from Laptop where brand like 'ASUS'");
-        String brand = "ASUS";
+        /*String brand = "ASUS";
         // Query query = session.createQuery("from Laptop where brand like ?1"); // just giving numbering to '?' to identify
         Query query = session.createQuery("select brand, model from Laptop where brand like ?1");
         query.setParameter(1, brand);
-        List<Object[]> laptops = query.getResultList();
+        List<Object[]> laptops = query.getResultList();*/
 
         // Fetching details
         // Laptop l1 = session.find(Laptop.class, 3);
         // System.out.println(l1);
         // System.out.println(laptops);
-        for (Object[] data: laptops) {
+        /*for (Object[] data: laptops) {
             System.out.println((String)data[0] + " " + (String)data[1]);
-        }
+        }*/
+
+        // Load instead of get
+        Laptop laptop = session.byId(Laptop.class).getReference(2);
+        // System.out.println(laptop);
 
         // Closing session
         session.close();
