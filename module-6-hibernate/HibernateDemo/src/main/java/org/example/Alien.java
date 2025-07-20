@@ -10,7 +10,8 @@ public class Alien {
     private int alienId;
     private String alienName;
     private String technology;
-    @OneToMany(mappedBy = "alien") // alien is name of variable in Laptop model
+    //  @OneToMany(mappedBy = "alien") // alien is name of variable in Laptop model
+    @ManyToMany
     private List<Laptop> laptops;
 
     public int getAlienId() {

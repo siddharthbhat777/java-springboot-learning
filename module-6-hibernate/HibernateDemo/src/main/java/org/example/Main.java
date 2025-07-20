@@ -61,17 +61,36 @@ public class Main {
         l2.setBrand("Dell");
         l2.setModel("XPS");
         l2.setRam(32);
+        Laptop l3 = new Laptop();
+        l3.setLaptopId(3);
+        l3.setBrand("Apple");
+        l3.setModel("Macbook");
+        l3.setRam(8);
 
         // Creating alien data
         Alien a1 = new Alien();
         a1.setAlienId(101);
         a1.setAlienName("Siddharth");
         a1.setTechnology("Java");
-        a1.setLaptops(Arrays.asList(l1, l2));
+
+        Alien a2 = new Alien();
+        a2.setAlienId(102);
+        a2.setAlienName("Ruchika");
+        a2.setTechnology("Python");
+
+        Alien a3 = new Alien();
+        a3.setAlienId(103);
+        a3.setAlienName("Vasudha");
+        a3.setTechnology("C++");
 
         // Association
-        l1.setAlien(a1);
-        l2.setAlien(a1);
+        a1.setLaptops(Arrays.asList(l1, l2));
+        a2.setLaptops(Arrays.asList(l2, l3));
+        a3.setLaptops(Arrays.asList(l1));
+
+        l1.setAliens(Arrays.asList(a1, a3));
+        l2.setAliens(Arrays.asList(a1, a2));
+        l3.setAliens(Arrays.asList(a2));
 
         // Using session
         SessionFactory sf = new Configuration()
@@ -84,7 +103,10 @@ public class Main {
         Transaction transaction = session.beginTransaction();
         session.persist(l1);
         session.persist(l2);
+        session.persist(l3);
         session.persist(a1);
+        session.persist(a2);
+        session.persist(a3);
         transaction.commit();
 
         // Closing session
