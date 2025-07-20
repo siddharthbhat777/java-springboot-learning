@@ -1,12 +1,24 @@
 package org.example;
 
 import jakarta.persistence.Embeddable;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 
-@Embeddable
+@Entity
 public class Laptop {
+    @Id
+    private  int laptopId;
     private String brand;
     private String model;
     private int ram;
+
+    public int getLaptopId() {
+        return laptopId;
+    }
+
+    public void setLaptopId(int laptopId) {
+        this.laptopId = laptopId;
+    }
 
     public String getBrand() {
         return brand;
@@ -35,7 +47,8 @@ public class Laptop {
     @Override
     public String toString() {
         return "Laptop{" +
-                "brand='" + brand + '\'' +
+                "laptopId=" + laptopId +
+                ", brand='" + brand + '\'' +
                 ", model='" + model + '\'' +
                 ", ram=" + ram +
                 '}';

@@ -50,6 +50,7 @@ public class Main {
 
         // Creating laptop data
         Laptop l1 = new Laptop();
+        l1.setLaptopId(1);
         l1.setBrand("ASUS");
         l1.setModel("ROG");
         l1.setRam(16);
@@ -62,11 +63,15 @@ public class Main {
         a1.setLaptop(l1);
 
         // Using session
-        SessionFactory sf = new Configuration().addAnnotatedClass(Alien.class).configure().buildSessionFactory();
+        SessionFactory sf = new Configuration()
+                .addAnnotatedClass(org.example.Alien.class)
+                .addAnnotatedClass(org.example.Laptop.class)
+                .configure().buildSessionFactory();
         Session session = sf.openSession();
 
         // Using transaction
         Transaction transaction = session.beginTransaction();
+        session.persist(l1);
         session.persist(a1);
         transaction.commit();
 
