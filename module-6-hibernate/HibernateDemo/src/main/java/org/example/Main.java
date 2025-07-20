@@ -49,13 +49,13 @@ public class Main {
         transaction.commit();*/
 
         // Creating alien data
-        Alien a1 = new Alien();
+        Alien1 a1 = new Alien1();
         a1.setAlienId(101);
         a1.setAlienName("Siddharth");
         a1.setTechnology("Java");
 
         // Using session
-        SessionFactory sf = new Configuration().addAnnotatedClass(org.example.Alien.class).configure().buildSessionFactory();
+        SessionFactory sf = new Configuration().addAnnotatedClass(Alien1.class).configure().buildSessionFactory();
         Session session = sf.openSession();
 
         // Using transaction

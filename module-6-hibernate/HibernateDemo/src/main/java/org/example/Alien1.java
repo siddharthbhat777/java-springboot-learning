@@ -3,12 +3,14 @@ package org.example;
 import jakarta.persistence.*;
 
 @Entity
-public class Alien {
+@Table(name = "alien_table") // change table name
+public class Alien1 {
     @Id
     private int alienId;
+    @Column(name = "a_name") // changes column name
     private String alienName;
+    @Transient // helps to exclude variables which should not be added to database but need for code operations
     private String technology;
-    private Laptop laptop;
 
     public int getAlienId() {
         return alienId;
@@ -34,21 +36,12 @@ public class Alien {
         this.technology = technology;
     }
 
-    public Laptop getLaptop() {
-        return laptop;
-    }
-
-    public void setLaptop(Laptop laptop) {
-        this.laptop = laptop;
-    }
-
     @Override
     public String toString() {
         return "Alien{" +
                 "alienId=" + alienId +
                 ", alienName='" + alienName + '\'' +
                 ", technology='" + technology + '\'' +
-                ", laptop=" + laptop +
                 '}';
     }
 }
