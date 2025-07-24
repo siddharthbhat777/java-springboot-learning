@@ -11,8 +11,10 @@ public class App
 {
     public static void main( String[] args )
     {
-        ApplicationContext context = new ClassPathXmlApplicationContext("spring.xml");
-        Alien obj = (Alien) context.getBean("alien");
-        obj.code();
+        ApplicationContext context = new ClassPathXmlApplicationContext("spring.xml"); // object will be created here
+        Alien obj1 = (Alien) context.getBean("alien1"); // we are just using already created object
+        obj1.code();
+        Alien obj2 = (Alien) context.getBean("alien1"); // as we are just using already created object, so it wont be created twice
+        obj2.code();
     }
 }
