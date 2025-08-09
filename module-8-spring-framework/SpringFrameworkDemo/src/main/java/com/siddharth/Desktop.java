@@ -1,8 +1,10 @@
 package com.siddharth;
 
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
 
 @Component("com2")
+@Primary
 public class Desktop implements Computer {
 
     public Desktop() {

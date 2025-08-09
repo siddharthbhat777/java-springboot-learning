@@ -12,7 +12,7 @@ public class Alien {
 
     @Autowired
     // @Qualifier("laptop") // can use class name with lowercase
-    @Qualifier("com2")
+    //  @Qualifier("com2")
     private Computer computer;
 
     public Alien() {
