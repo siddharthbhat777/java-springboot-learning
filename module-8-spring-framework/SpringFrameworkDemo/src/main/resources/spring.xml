@@ -21,11 +21,18 @@
     </bean>
     <bean id="alien2" class="com.siddharth.Alien"/>
     <bean id="computer1" class="com.siddharth.Laptop" primary="true"/> <!--primary helps in type confusion-->
-    <bean id="computer2" class="com.siddharth.Desktop"/>
+    <bean id="computer2" class="com.siddharth.Desktop" lazy-init="true"/> <!--lazy-init helps to initialize object when it is used/needed-->
+    <!--lazy doesn't make objects of scope prototype, it creates when needed but still keeps it singleton-->
     <!--
     Scopes:
     1. Singletion - Creates single object of a class while loading the app and reuse it multiple times.
     2. Prototype - Allow to multiple objects of a class as per requirements but not while loading but whenever using it.
     -->
+    <bean id="alien3" class="com.siddharth.Alien">
+        <property name="computer3">
+            <bean id="computer3" class="com.siddharth.Laptop"/>
+        </property>
+    </bean>
+
 </beans>
 
