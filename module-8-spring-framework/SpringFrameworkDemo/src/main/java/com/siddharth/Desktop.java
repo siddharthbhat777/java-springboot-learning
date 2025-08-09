@@ -1,5 +1,8 @@
 package com.siddharth;
 
+import org.springframework.stereotype.Component;
+
+@Component("com2")
 public class Desktop implements Computer {
 
     public Desktop() {
