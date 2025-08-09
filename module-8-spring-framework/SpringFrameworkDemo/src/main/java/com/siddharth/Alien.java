@@ -4,17 +4,17 @@ import java.beans.ConstructorProperties;
 
 public class Alien {
     private int age;
-    private Laptop laptop;
+    private Computer computer;
 
     public Alien() {
         System.out.println("Alien object created");
     }
 
-    @ConstructorProperties({ "age", "laptop" }) // for "name"  attr constructor injection
-    public Alien(int age, Laptop laptop) {
+    /*@ConstructorProperties({ "age", "computer" }) // for "name"  attr constructor injection
+    public Alien(int age, Computer computer) {
         this.age = age;
-        this.laptop = laptop;
-    }
+        this.computer = computer;
+    }*/
 
     public int getAge() {
         return age;
@@ -25,16 +25,16 @@ public class Alien {
         this.age = age;
     }
 
-    public Laptop getLaptop() {
-        return laptop;
+    public Computer getComputer() {
+        return computer;
     }
 
-    public void setLaptop(Laptop laptop) {
-        this.laptop = laptop;
+    public void setComputer(Computer computer) {
+        this.computer = computer;
     }
 
     public void code() {
         System.out.println("Coding...");
-        laptop.compile();
+        computer.compile();
     }
 }
