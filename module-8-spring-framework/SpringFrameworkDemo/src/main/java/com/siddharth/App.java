@@ -13,6 +13,10 @@ public class App {
         // Java based config
         ApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
 
+        Alien obj1 = context.getBean(Alien.class);
+        System.out.println(obj1.getAge());
+        obj1.code();
+
         Desktop dt1 = context.getBean("desktop", Desktop.class);
         dt1.compile();
 
