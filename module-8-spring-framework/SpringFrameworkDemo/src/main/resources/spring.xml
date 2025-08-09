@@ -4,8 +4,13 @@
         http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
     <!-- bean definitions here -->
-    <bean id="alien1" class="com.siddharth.Alien"></bean>
+    <bean id="alien1" class="com.siddharth.Alien" scope="prototype"></bean> <!--Default scope is 'singleton'-->
     <bean id="alien2" class="com.siddharth.Alien"></bean>
     <bean class="com.siddharth.Laptop"></bean>
+    <!--
+    Scopes:
+    1. Singletion - Creates single object of a class while loading the app and reuse it multiple times.
+    2. Prototype - Allow to multiple objects of a class as per requirements but not while loading but whenever using it.
+    -->
 </beans>
 
