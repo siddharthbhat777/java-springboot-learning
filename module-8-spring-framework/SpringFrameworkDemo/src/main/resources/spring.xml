@@ -4,7 +4,10 @@
         http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
     <!-- bean definitions here -->
-    <bean id="alien1" class="com.siddharth.Alien" scope="prototype"></bean> <!--Default scope is 'singleton'-->
+    <!--    <bean id="alien1" class="com.siddharth.Alien" scope="prototype"></bean> Default scope is 'singleton' -->
+    <bean id="alien1" class="com.siddharth.Alien">
+        <property name="age" value="25"></property> <!--using setter injection-->
+    </bean>
     <bean id="alien2" class="com.siddharth.Alien"></bean>
     <bean class="com.siddharth.Laptop"></bean>
     <!--
