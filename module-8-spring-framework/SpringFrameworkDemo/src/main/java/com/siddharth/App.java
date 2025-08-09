@@ -13,8 +13,11 @@ public class App {
         // Java based config
         ApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
 
-        Desktop dt = context.getBean("desktop", Desktop.class);
-        dt.compile();
+        Desktop dt1 = context.getBean("desktop", Desktop.class);
+        dt1.compile();
+
+        Desktop dt2 = context.getBean("desktop", Desktop.class);
+        dt2.compile();
 
         // XML Config
         /*ApplicationContext context = new ClassPathXmlApplicationContext("spring.xml"); // object will be created here
