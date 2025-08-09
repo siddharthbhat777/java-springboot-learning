@@ -3,15 +3,18 @@ package com.siddharth.config;
 import com.siddharth.Alien;
 import com.siddharth.Computer;
 import com.siddharth.Desktop;
+import com.siddharth.Laptop;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.Scope;
 
 @Configuration
 public class AppConfig {
 
-    @Bean
+    /*@Bean
     public Alien alien1() {
         Alien obj = new Alien();
         obj.setAge(25);
@@ -35,6 +38,22 @@ public class AppConfig {
         obj.setAge(25);
         obj.setComputer(com);
         return obj;
+    }*/
+
+    /*@Bean
+    public Alien alien(@Qualifier("desktop") Computer com) { // @Qualifier = ref
+        Alien obj = new Alien();
+        obj.setAge(25);
+        obj.setComputer(com);
+        return obj;
+    }*/
+
+    @Bean
+    public Alien alien(Computer com) {
+        Alien obj = new Alien();
+        obj.setAge(25);
+        obj.setComputer(com);
+        return obj;
     }
 
     //  @Bean(name = "com2")
@@ -43,5 +62,11 @@ public class AppConfig {
     //  @Scope("prototype") // setting scope
     public Desktop desktop() { // function name is default bean name
         return new Desktop(); // we are just asking spring to do this
+    }
+
+    @Bean
+    @Primary
+    public Laptop laptop() {
+        return new Laptop();
     }
 }

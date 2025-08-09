@@ -17,11 +17,11 @@ public class App {
         System.out.println(obj1.getAge());
         obj1.code();
 
-        Desktop dt1 = context.getBean("desktop", Desktop.class);
+        /*Desktop dt1 = context.getBean("desktop", Desktop.class);
         dt1.compile();
 
         Desktop dt2 = context.getBean("desktop", Desktop.class);
-        dt2.compile();
+        dt2.compile();*/
 
         // XML Config
         /*ApplicationContext context = new ClassPathXmlApplicationContext("spring.xml"); // object will be created here
