@@ -1,4 +1,4 @@
-package com.siddharth.app;
+package com.siddharth.app.model;
 
 import org.springframework.stereotype.Component;
 
