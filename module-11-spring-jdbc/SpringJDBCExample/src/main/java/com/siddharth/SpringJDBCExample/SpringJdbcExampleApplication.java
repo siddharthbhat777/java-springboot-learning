@@ -14,7 +14,7 @@ public class SpringJdbcExampleApplication {
 	public static void main(String[] args) {
 		ApplicationContext context = SpringApplication.run(SpringJdbcExampleApplication.class, args);
         Student s = context.getBean(Student.class);
-        s.setRollNo(101);
+        s.setRollNo(104);
         s.setName("Siddharth");
         s.setMarks(94);
 
