@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class HomeController {
@@ -30,7 +31,7 @@ public class HomeController {
     }*/
 
     // Spring way with param and model object
-    @RequestMapping("add")
+    /*@RequestMapping("add")
     public String add(int num1, @RequestParam("num2") int number2, Model model) {
         int result = num1 + number2;
 
@@ -38,5 +39,16 @@ public class HomeController {
 
         System.out.println(result);
         return "result";
+    }*/
+
+    // Model and view combined
+    @RequestMapping("add")
+    public ModelAndView add(int num1, @RequestParam("num2") int number2, ModelAndView mv) {
+        int result = num1 + number2;
+
+        mv.addObject("result", result);
+        mv.setViewName("result");
+
+        return mv;
     }
 }
