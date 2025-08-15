@@ -6,6 +6,8 @@
     </head>
     </body>
         <!-- <h2>Result is: <%= session.getAttribute("result") %></h2> -> normal servlet way -->
-        <h2>Result is: ${result}</h2> <!-- JSTL way -->
+        <p>${alien}</h2> <!-- JSTL way -->
+
+        <p>Welcome to the ${course} world</p>
     </body>
 </html>
