@@ -13,7 +13,7 @@ public class SpringDataJpaExampleApplication {
 
         StudentRepo repo = context.getBean(StudentRepo.class);
 
-        Student s1 = context.getBean(Student.class);
+        /*Student s1 = context.getBean(Student.class);
         Student s2 = context.getBean(Student.class);
         Student s3 = context.getBean(Student.class);
 
@@ -29,7 +29,9 @@ public class SpringDataJpaExampleApplication {
         s3.setName("Vasudha");
         s3.setMarks(65);
 
-        repo.save(s1);
-	}
+        repo.save(s2);
+        repo.save(s3);*/
 
+        System.out.println(repo.findAll());
+	}
 }
