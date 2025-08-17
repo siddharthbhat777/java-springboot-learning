@@ -1,10 +1,10 @@
-package com.siddharth.SpringJDBCExample;
+package com.siddharth.spring_data_jpa_example;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class SpringJdbcExampleApplicationTests {
+class SpringDataJpaExampleApplicationTests {
 
 	@Test
 	void contextLoads() {

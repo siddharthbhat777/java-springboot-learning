@@ -1,4 +1,4 @@
-package com.siddharth.SpringJDBCExample.model;
+package com.siddharth.spring_data_jpa_example.model;
 
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
