@@ -5,6 +5,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 
+import java.util.Optional;
+
 @SpringBootApplication
 public class SpringDataJpaExampleApplication {
 
@@ -32,6 +34,12 @@ public class SpringDataJpaExampleApplication {
         repo.save(s2);
         repo.save(s3);*/
 
-        System.out.println(repo.findAll());
+        // System.out.println(repo.findAll());
+
+        System.out.println(repo.findById(103)); // returns optional object to handle null output
+
+        // to handle null output by yourself
+        Optional<Student> student = repo.findById(105);
+        System.out.println(student.orElse(new Student())); // returns blank object if data not found
 	}
 }
