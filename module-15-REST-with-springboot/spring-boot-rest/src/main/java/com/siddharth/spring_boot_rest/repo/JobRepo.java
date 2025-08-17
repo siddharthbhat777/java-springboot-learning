@@ -24,7 +24,6 @@ public class JobRepo {
 
     public void addJob(JobPost job) {
         jobs.add(job);
-        System.out.println(jobs);
     }
 
     public JobPost getJob(int postId) {
@@ -33,5 +32,25 @@ public class JobRepo {
                 return job;
         }
         return null;
+    }
+
+    public void updateJob(JobPost jobPost) {
+        // Short way
+        /*jobs.remove(jobPost);
+        jobs.add(jobPost);*/
+
+        // Ideal way
+        for (JobPost job : jobs) {
+            if (job.getPostId() == jobPost.getPostId()) {
+                job.setPostProfile(jobPost.getPostProfile());
+                job.setPostDesc(jobPost.getPostDesc());
+                job.setReqExperience(jobPost.getReqExperience());
+                job.setPostTechStack(jobPost.getPostTechStack());
+            }
+        }
+    }
+
+    public void deleteJob(int postId) {
+        jobs.removeIf(job -> job.getPostId() == postId);
     }
 }
