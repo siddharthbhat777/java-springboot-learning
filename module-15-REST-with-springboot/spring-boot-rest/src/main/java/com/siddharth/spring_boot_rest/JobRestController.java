@@ -14,10 +14,10 @@ public class JobRestController {
     @Autowired
     private JobService service;
 
-    @GetMapping("jobPosts")
+    @GetMapping(path = "jobPosts", produces = {"application/json"}) // produces -> this function only returns specified data types
     // @ResponseBody -> need to use this if you are treating component as Controller and not RestController
     public List<JobPost> getAllJobs() {
-        return service.getAllJobs();
+        return service.getAllJobs(); // jackson library (in-built with spring) converts data into JSON
     }
 
     @GetMapping("jobPost/{postId}")
@@ -25,7 +25,7 @@ public class JobRestController {
         return service.getJob(postId);
     }
 
-    @PostMapping("jobPost")
+    @PostMapping(path = "jobPost", consumes = "application/json") // consumes -> accept only specified type of data
     public JobPost addJob(@RequestBody JobPost jobPost) {
         service.addJob(jobPost);
         return service.getJob(jobPost.getPostId());
