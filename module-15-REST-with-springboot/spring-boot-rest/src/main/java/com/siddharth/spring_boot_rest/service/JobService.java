@@ -1,7 +1,7 @@
 package com.siddharth.spring_boot_rest.service;
 
-import com.siddharth.JobApp.model.JobPost;
-import com.siddharth.JobApp.repo.JobRepo;
+import com.siddharth.spring_boot_rest.model.JobPost;
+import com.siddharth.spring_boot_rest.repo.JobRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
