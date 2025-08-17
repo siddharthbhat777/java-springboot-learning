@@ -36,10 +36,13 @@ public class SpringDataJpaExampleApplication {
 
         // System.out.println(repo.findAll());
 
-        System.out.println(repo.findById(103)); // returns optional object to handle null output
+        // System.out.println(repo.findById(103)); // returns optional object to handle null output
 
         // to handle null output by yourself
-        Optional<Student> student = repo.findById(105);
-        System.out.println(student.orElse(new Student())); // returns blank object if data not found
+        /*Optional<Student> student = repo.findById(105);
+        System.out.println(student.orElse(new Student()));*/ // returns blank object if data not found
+
+        System.out.println(repo.findByName("Siddharth")); // created custom method
+        System.out.println(repo.findByMarksGreaterThan(72)); // created custom method
 	}
 }
