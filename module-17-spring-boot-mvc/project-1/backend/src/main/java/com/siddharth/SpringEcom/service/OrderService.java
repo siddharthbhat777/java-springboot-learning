@@ -74,7 +74,7 @@ public class OrderService {
         List<Order> orders = orderRepo.findAll();
         List<OrderResponse> orderResponses = new ArrayList<>();
         for (Order order : orders) {
-            
+
             List<OrderItemResponse> itemResponses = new ArrayList<>();
             for (OrderItem item : order.getOrderItems()) {
                 OrderItemResponse orderItemResponse = new OrderItemResponse(
