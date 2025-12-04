@@ -1,4 +1,4 @@
-package com.siddharth.spring_boot_rest;
+package com.siddharth.spring_boot_rest.controller;
 
 import com.siddharth.spring_boot_rest.model.JobPost;
 import com.siddharth.spring_boot_rest.service.JobService;
