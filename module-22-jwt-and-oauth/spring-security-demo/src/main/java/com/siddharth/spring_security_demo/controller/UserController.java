@@ -1,6 +1,7 @@
 package com.siddharth.spring_security_demo.controller;
 
 import com.siddharth.spring_security_demo.model.User;
+import com.siddharth.spring_security_demo.service.JwtService;
 import com.siddharth.spring_security_demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -18,6 +19,9 @@ public class UserController {
     private UserService service;
 
     @Autowired
+    private JwtService jwtService;
+
+    @Autowired
     AuthenticationManager authenticationManager;
 
     // private BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(12);
@@ -33,7 +37,7 @@ public class UserController {
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword()));
 
         if (authentication.isAuthenticated())
-            return "Success";
+            return jwtService.generateToken(user.getUsername());
         else
             return "Login Failed";
     }
