@@ -1,0 +1,22 @@
+services:
+  app:
+    build: .
+    ports:
+      - "8080:8080"
+    networks:
+      - sid-network
+
+  postgres:
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: siddharth
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: studentapp
+    ports:
+      - "5433:5432"
+    networks:
+      - sid-network
+
+networks:
+  sid-network:
+    driver: bridge
