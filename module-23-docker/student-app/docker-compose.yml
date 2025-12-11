@@ -16,7 +16,12 @@ services:
       - "5433:5432"
     networks:
       - sid-network
+    volumes:
+      - postgres-sid-data:/var/lib/postgresql
 
 networks:
   sid-network:
     driver: bridge
+
+volumes:
+  postgres-sid-data:
