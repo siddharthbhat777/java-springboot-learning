@@ -1,6 +1,7 @@
 package com.siddharth.SpringAICode;
 
 import org.springframework.ai.chat.client.ChatClient;
+import org.springframework.ai.chat.model.ChatResponse;
 import org.springframework.ai.openai.OpenAiChatModel;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,7 +19,14 @@ public class ChatClientController {
 
     @GetMapping("/api/openai/chat/{message}")
     public ResponseEntity<String> getAnswer(@PathVariable String message) {
-        String response = chatClient.prompt(message).call().content();
+        // String response = chatClient.prompt(message).call().content(); // getting LLM model response directly
+
+        // More options using ChatResponse
+        ChatResponse chatResponse = chatClient.prompt(message).call().chatResponse();
+
+        System.out.println(chatResponse.getMetadata().getModel());
+
+        String response = chatResponse.getResult().getOutput().getText(); // same response but with different way with more options
         return ResponseEntity.ok(response);
     }
 }
