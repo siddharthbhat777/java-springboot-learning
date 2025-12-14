@@ -14,7 +14,7 @@ public class OpenAIController {
         this.chatModel = chatModel;
     }
 
-    @GetMapping("/api/{message}")
+    @GetMapping("/api/openai/{message}")
     public String getAnswer(@PathVariable String message) {
         String response = chatModel.call(message);
         return response;
