@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @RestController
 public class ChatClientController {
@@ -104,12 +105,49 @@ public class ChatClientController {
             norm2 += Math.pow(embedding2[i], 2);
         }
 
-        return dotProduct*100 / (Math.sqrt(norm1) * Math.sqrt(norm2));
+        return dotProduct * 100 / (Math.sqrt(norm1) * Math.sqrt(norm2));
     }
 
     @PostMapping("/api/product")
     public List<Document> getProducts(@RequestParam String text) {
         // return vectorStore.similaritySearch(text);
         return vectorStore.similaritySearch(SearchRequest.builder().query(text).topK(2).build());
+    }
+
+    @PostMapping("/api/rag/chat/{message}")
+    public String getAnswerUsingRag(@RequestParam String query) {
+        // RAG implementation
+        // Note: not working for this ai version
+        /*return chatClient
+                .prompt(query)
+                .advisors(QuestionAnswerAdvisor.builder(vectorStore).build())
+                .call()
+                .content();*/
+
+        // Handling manually without RAG
+        List<Document> docs = vectorStore.similaritySearch(query);
+
+        String context = docs.stream()
+                .map(Document::getText)
+                .collect(Collectors.joining("\n"));
+
+        PromptTemplate promptTemplate = new PromptTemplate("""
+                    You are a helpful assistant.
+                    Answer the question using ONLY the context below.
+                
+                    Context:
+                    {context}
+                
+                    Question:
+                    {question}
+                """);
+
+        return chatClient
+                .prompt(promptTemplate.create(Map.of(
+                        "context", context,
+                        "question", query
+                )))
+                .call()
+                .content();
     }
 }
