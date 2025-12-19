@@ -38,7 +38,7 @@ public class ImageGenController {
 
     @PostMapping("/image/describe")
     public String descImage(@RequestParam String query, @RequestParam MultipartFile file) {
-        chatClient
+        return chatClient
                 .prompt()
                 .user(us -> us.text(query).media(MimeTypeUtils.IMAGE_JPEG, file.getResource()))
                 .call()
