@@ -1,6 +1,7 @@
 package com.siddharth.SpringAICode;
 
 import org.springframework.ai.chat.client.ChatClient;
+import org.springframework.ai.converter.BeanOutputConverter;
 import org.springframework.ai.converter.ListOutputConverter;
 import org.springframework.ai.openai.OpenAiChatModel;
 import org.springframework.core.convert.support.DefaultConversionService;
@@ -28,5 +29,18 @@ public class MovieController {
 
         return movies;
 
+    }
+
+    @GetMapping("/movie")
+    public Movie getMovieData(@RequestParam String name){
+
+        BeanOutputConverter<Movie> opCon=new BeanOutputConverter<Movie>(Movie.class);
+
+        Movie movie = chatClient.prompt()
+                .user(u -> u.text("Get me the best movie of {name}").param("name", name))
+                .call()
+                .entity(new BeanOutputConverter<Movie>(Movie.class));
+
+        return movie;
     }
 }
