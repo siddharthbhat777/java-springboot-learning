@@ -2,6 +2,7 @@ package com.siddharth.SpringAICode;
 
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.client.advisor.MessageChatMemoryAdvisor;
+import org.springframework.ai.chat.client.advisor.vectorstore.QuestionAnswerAdvisor;
 import org.springframework.ai.chat.memory.ChatMemory;
 import org.springframework.ai.chat.memory.MessageWindowChatMemory;
 import org.springframework.ai.chat.model.ChatResponse;
@@ -118,35 +119,9 @@ public class ChatClientController {
     public String getAnswerUsingRag(@RequestParam String query) {
         // RAG implementation
         // Note: not working for this ai version
-        /*return chatClient
+        return chatClient
                 .prompt(query)
                 .advisors(QuestionAnswerAdvisor.builder(vectorStore).build())
-                .call()
-                .content();*/
-
-        // Handling manually without RAG
-        List<Document> docs = vectorStore.similaritySearch(query);
-
-        String context = docs.stream()
-                .map(Document::getText)
-                .collect(Collectors.joining("\n"));
-
-        PromptTemplate promptTemplate = new PromptTemplate("""
-                    You are a helpful assistant.
-                    Answer the question using ONLY the context below.
-                
-                    Context:
-                    {context}
-                
-                    Question:
-                    {question}
-                """);
-
-        return chatClient
-                .prompt(promptTemplate.create(Map.of(
-                        "context", context,
-                        "question", query
-                )))
                 .call()
                 .content();
     }
