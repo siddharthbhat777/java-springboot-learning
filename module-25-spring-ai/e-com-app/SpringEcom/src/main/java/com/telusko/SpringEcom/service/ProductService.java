@@ -43,4 +43,8 @@ public class ProductService {
     public List<Product> searchProducts(String keyword) {
         return productRepo.searchProducts(keyword);
     }
+
+    public String generateDescription(String name, String category) {
+        return "Demo description";
+    }
 }
