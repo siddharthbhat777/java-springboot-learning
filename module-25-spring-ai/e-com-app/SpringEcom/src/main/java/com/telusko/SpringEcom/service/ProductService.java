@@ -3,6 +3,8 @@ package com.telusko.SpringEcom.service;
 import com.telusko.SpringEcom.model.Product;
 import com.telusko.SpringEcom.repo.ProductRepo;
 import org.springframework.ai.chat.client.ChatClient;
+import org.springframework.ai.document.Document;
+import org.springframework.ai.vectorstore.VectorStore;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -10,6 +12,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 @Service
 public class ProductService {
@@ -19,6 +23,9 @@ public class ProductService {
 
     @Autowired
     private ChatClient chatClient;
+
+    @Autowired
+    private VectorStore vectorStore;
 
     @Autowired
     private AiImageGeneratorService aiImageGeneratorService;
@@ -37,7 +44,38 @@ public class ProductService {
         product.setImageType(image.getContentType());
         product.setProductImage(image.getBytes());
 
-        return productRepo.save(product);
+        Product savedProduct = productRepo.save(product);
+
+        String content = String.format("""
+                        
+                        Product Name: %s
+                        Description: %s
+                        Brand: %s
+                        Category: %s
+                        Price: %.2f
+                        Release Date: %s
+                        Available: %s
+                        Stock: %s
+                        """,
+                savedProduct.getName(),
+                savedProduct.getDescription(),
+                savedProduct.getBrand(),
+                savedProduct.getCategory(),
+                savedProduct.getPrice(),
+                savedProduct.getReleaseDate(),
+                savedProduct.isProductAvailable(),
+                savedProduct.getStockQuantity()
+        );
+
+        Document document = new Document(
+                UUID.randomUUID().toString(),
+                content,
+                Map.of("productId", String.valueOf(savedProduct.getId()))
+        );
+
+        vectorStore.add(List.of(document));
+
+        return savedProduct;
 
     }
 
