@@ -1,6 +1,7 @@
 package com.siddharth.quiz_service.controller;
 
 import com.siddharth.quiz_service.model.QuestionWrapper;
+import com.siddharth.quiz_service.model.QuizDto;
 import com.siddharth.quiz_service.model.Response;
 import com.siddharth.quiz_service.service.QuizService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,8 +18,8 @@ public class QuizController {
     private QuizService quizService;
 
     @PostMapping("create")
-    public ResponseEntity<String> createQuiz(@RequestParam String category, @RequestParam int numQ, @RequestParam String title) {
-        return quizService.createQuiz(category, numQ, title);
+    public ResponseEntity<String> createQuiz(@RequestBody QuizDto quizDto) {
+        return quizService.createQuiz(quizDto.getCategoryName(), quizDto.getNumQuestions(), quizDto.getTitle());
     }
 
     @GetMapping("get/{id}")

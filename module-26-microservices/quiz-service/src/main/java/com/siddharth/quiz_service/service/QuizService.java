@@ -1,7 +1,6 @@
 package com.siddharth.quiz_service.service;
 
 import com.siddharth.quiz_service.dao.QuizDao;
-import com.siddharth.quiz_service.model.Question;
 import com.siddharth.quiz_service.model.QuestionWrapper;
 import com.siddharth.quiz_service.model.Quiz;
 import com.siddharth.quiz_service.model.Response;
@@ -12,7 +11,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class QuizService {
@@ -33,29 +31,29 @@ public class QuizService {
     }
 
     public ResponseEntity<List<QuestionWrapper>> getQuizQuestions(Integer id) {
-        Optional<Quiz> quiz = quizDao.findById(id);
-        List<Question> questionsFromDB = quiz.get().getQuestions();
+        /*Optional<Quiz> quiz = quizDao.findById(id);
+        List<Question> questionsFromDB = quiz.get().getQuestions();*/
         List<QuestionWrapper> questionsForUser = new ArrayList<>();
 
-        for (Question question : questionsFromDB) {
+        /*for (Question question : questionsFromDB) {
             QuestionWrapper questionWrapper = new QuestionWrapper(question.getId(), question.getQuestionTitle(), question.getOption1(), question.getOption2(), question.getOption3(), question.getOption4());
             questionsForUser.add(questionWrapper);
-        }
+        }*/
 
         return new ResponseEntity<>(questionsForUser, HttpStatus.OK);
     }
 
     public ResponseEntity<Integer> calculateResult(Integer id, List<Response> responses) {
         Quiz quiz = quizDao.findById(id).get();
-        List<Question> questions = quiz.getQuestions();
+        // List<Question> questions = quiz.getQuestions();
 
         int correctAnswers = 0;
-        int i = 0;
+        /*int i = 0;
         for (Response response : responses) {
             if (response.getResponse().equals(questions.get(i).getRightAnswer()))
                 correctAnswers++;
             i++;
-        }
+        }*/
 
         return new ResponseEntity<>(correctAnswers, HttpStatus.OK);
     }
