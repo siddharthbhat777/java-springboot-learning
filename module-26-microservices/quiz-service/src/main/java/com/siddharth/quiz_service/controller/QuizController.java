@@ -27,7 +27,7 @@ public class QuizController {
         return quizService.getQuizQuestions(id);
     }
 
-    @PostMapping("submit/{id}")
+    @PostMapping("submit")
     public ResponseEntity<Integer> submitQuiz(@RequestBody List<Response> responses) {
         return quizService.calculateResult(responses);
     }
