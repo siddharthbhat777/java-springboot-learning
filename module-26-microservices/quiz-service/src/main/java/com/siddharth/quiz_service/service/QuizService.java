@@ -1,6 +1,7 @@
 package com.siddharth.quiz_service.service;
 
 import com.siddharth.quiz_service.dao.QuizDao;
+import com.siddharth.quiz_service.feign.QuizInterface;
 import com.siddharth.quiz_service.model.QuestionWrapper;
 import com.siddharth.quiz_service.model.Quiz;
 import com.siddharth.quiz_service.model.Response;
@@ -17,15 +18,16 @@ public class QuizService {
 
     @Autowired
     private QuizDao quizDao;
-    /*@Autowired
-    private QuestionDao questionDao;*/
+
+    @Autowired
+    QuizInterface quizInterface;
 
     public ResponseEntity<String> createQuiz(String category, int numQ, String title) {
-        /*List<Question> questions = questionDao.findRandomQuestionsByCategory(category, numQ);
+        List<Integer> questions = quizInterface.getQuestionsForQuiz(category, numQ).getBody();
         Quiz quiz = new Quiz();
         quiz.setTitle(title);
-        quiz.setQuestions(questions);
-        quizDao.save(quiz);*/
+        quiz.setQuestionIds(questions);
+        quizDao.save(quiz);
 
         return new ResponseEntity<>("Quiz created", HttpStatus.CREATED);
     }
